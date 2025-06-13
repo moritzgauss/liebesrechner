@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>💖 Liebeskompatibilitätstester 💖</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #4b004b;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d80073;
+      text-shadow: 2px 2px #fff0f5;
+    }
+
+    .heart {
+      font-size: 2em;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    form {
+      margin-top: 30px;
+      background: #fff0f5;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff69b4;
+      display: inline-block;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      width: 200px;
+      font-size: 1em;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 30px;
+      background: #ff69b4;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 10px 30px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background: #e754a6;
+    }
+
+    .result {
+      margin-top: 40px;
+      font-size: 1.4em;
+      background: #ffe4ec;
+      padding: 20px;
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow: 0 0 10px #ff1493;
+    }
+
+    .supermatch {
+      color: #ff1493;
+      font-weight: bold;
+    }
+
+    .sparkle {
+      color: gold;
+      font-size: 1.2em;
+      animation: blink 1.2s infinite alternate;
+    }
+
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Der große Liebeskompatibilitätstester 💖</h1>
+  <div class="heart">💓💓💓</div>
+
+  <form id="loveForm">
+    <label for="personA">Dein Geburtstag (z. B. 01.04.1995):</label>
+    <input type="text" id="personA" placeholder="TT.MM.JJJJ" required>
+
+    <label for="partnerA">Partner A Geburtstag:</label>
+    <input type="text" id="partnerA" placeholder="TT.MM.JJJJ" required>
+
+    <label for="partnerB">Partner B Geburtstag:</label>
+    <input type="text" id="partnerB" placeholder="TT.MM.JJJJ" required>
+
+    <button type="submit">💘 Liebe berechnen 💘</button>
+  </form>
+
+  <div class="result" id="resultBox" style="display: none;"></div>
+
+  <script>
+    function summeAusGeburtstag(geburtstag) {
+      return geburtstag.replace(/\D/g, '') // alle Nicht-Zahlen entfernen
+                       .split('')
+                       .map(Number)
+                       .reduce((a, b) => a + b, 0);
+    }
+
+    function kommentar(diff) {
+      if (diff === 0) {
+        return "💞 ABSOLUTER SUPERMATCH! Ihr seid wie für einander geboren! 💞";
+      } else if (diff <= 1) {
+        return "✨ Super! Eure Herzen schlagen fast im selben Takt! ✨";
+      } else if (diff <= 5) {
+        return "💖 Sehr glücklich! Eure Liebe ist wie ein warmer Sonnenaufgang. 💖";
+      } else if (diff <= 10) {
+        return "🌹 Glücklich! Vielleicht nicht perfekt, aber Liebe findet einen Weg. 🌹";
+      } else {
+        return "💔 Unterschiedlich – aber Gegensätze ziehen sich ja manchmal an... 💔";
+      }
+    }
+
+    document.getElementById('loveForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const personA = document.getElementById('personA').value;
+      const partnerA = document.getElementById('partnerA').value;
+      const partnerB = document.getElementById('partnerB').value;
+
+      const sumA = summeAusGeburtstag(personA);
+      const sumB = summeAusGeburtstag(partnerA);
+      const sumC = summeAusGeburtstag(partnerB);
+
+      const diffAB = Math.abs(sumA - sumB);
+      const diffAC = Math.abs(sumA - sumC);
+
+      let msg = `<div><strong>Partner A:</strong> ${kommentar(diffAB)}</div>`;
+      msg += `<div style="margin-top:15px;"><strong>Partner B:</strong> ${kommentar(diffAC)}</div>`;
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.innerHTML = msg;
+      resultBox.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
