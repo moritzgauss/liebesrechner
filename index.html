@@ -3,144 +3,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💖 Liebeskompatibilitätstester 💖</title>
+  <title>❧ Der große Liebeskompatibilitätstester ❧</title>
   <style>
-    /* Basis-Stil */
+    /* Allgemeines Styling */
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #ffc0cb, #ffe4e1);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #4b004b;
-      text-align: center;
+      background: linear-gradient(135deg, #f3f0e5, #e4f0e8);
+      font-family: 'Georgia', serif;
+      color: #3b2f2f;
+      transition: background 1s ease, color 1s ease;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 2em auto;
+      padding: 2em;
+      background: #faf9f6;
+      border: 2px solid #cfc8b2;
+      border-radius: 30px;
+      box-shadow: 0 0 30px rgba(112, 98, 80, 0.2);
+      position: relative;
     }
 
     h1 {
+      text-align: center;
       font-size: 2.5em;
-      color: #d80073;
-      margin: 1em 0 0.5em;
-      text-shadow: 2px 2px #fff;
+      margin-bottom: 0.5em;
     }
 
-    .heart {
-      font-size: 2em;
-      animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.2); }
+    h1::before, h1::after {
+      content: "❦❧";
+      margin: 0 0.5em;
+      color: #a87f5a;
     }
 
     form {
-      background: #fff0f5;
-      margin: 2em auto;
-      padding: 2em;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #ff69b4;
-      max-width: 400px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      gap: 1.5em;
     }
 
     label {
       font-weight: bold;
-      margin: 1em 0 0.5em;
+      margin-bottom: 0.5em;
       font-size: 1.1em;
     }
 
-    .custom-input {
-      width: 100%;
-      padding: 12px 20px;
-      font-size: 1em;
-      border: 2px solid #ff69b4;
-      border-radius: 50px;
-      background: #fffafc;
-      color: #4b004b;
-      box-shadow: inset 0 2px 5px rgba(255, 105, 180, 0.2);
-      outline: none;
-      transition: border-color 0.3s;
+    .ornament-input {
+      padding: 14px 20px;
+      border: 3px dashed #8c715a;
+      border-radius: 30px;
+      background: #fffaf3;
+      font-size: 1.1em;
+      font-family: 'Georgia', serif;
+      box-shadow: inset 0 0 10px rgba(100, 80, 50, 0.1);
+      transition: border 0.3s;
     }
 
-    .custom-input:focus {
-      border-color: #d80073;
+    .ornament-input:focus {
+      outline: none;
+      border-color: #b39c86;
     }
 
     button {
-      margin-top: 2em;
-      background: #ff69b4;
-      border: none;
-      color: white;
+      background: #8c715a;
+      color: #fff;
       font-size: 1.2em;
       padding: 12px 40px;
+      border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: background 0.3s;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: #e754a6;
+      background: #a3876d;
+    }
+
+    .summe-box {
+      font-size: 1.4em;
+      text-align: center;
+      margin-top: 2em;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .summe-value {
+      font-size: 3em;
+      font-weight: bold;
+      color: #5a3b2e;
+      display: inline-block;
+      transition: transform 0.5s ease;
     }
 
     .result {
-      margin: 2em auto;
+      margin-top: 2em;
       font-size: 1.3em;
-      background: #ffe4ec;
+      text-align: center;
+      background: #fdfaf5;
+      border: 2px dotted #b8a47a;
       padding: 1.5em;
       border-radius: 20px;
-      box-shadow: 0 0 10px #ff1493;
-      max-width: 400px;
+      box-shadow: 0 0 20px rgba(120, 100, 80, 0.1);
+      transition: background 0.3s;
     }
 
     .supermatch {
-      color: #ff1493;
-      font-weight: bold;
+      animation: sparkle 1s infinite alternate;
+      color: #d4a373;
+      font-size: 1.5em;
     }
 
-    .sparkle {
-      color: gold;
-      font-size: 1.2em;
-      animation: blink 1.2s infinite alternate;
+    @keyframes sparkle {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.1); opacity: 0.7; }
     }
 
-    @keyframes blink {
-      from { opacity: 1; }
-      to { opacity: 0.3; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dark-mode {
+      background: linear-gradient(#111, #333);
+      color: #ccc;
+    }
+
+    .dark-mode .container {
+      background: #222;
+      border-color: #444;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+    .dark-mode .ornament-input {
+      background: #2a2a2a;
+      border-color: #555;
+      color: #ddd;
+    }
+
+    .dark-mode .result {
+      background: #333;
+      border-color: #555;
+    }
+
+    footer {
+      margin-top: 3em;
+      text-align: center;
+      font-size: 0.9em;
+      color: #999;
+    }
+
+    .ornaments {
+      text-align: center;
+      font-size: 1.5em;
+      color: #b8a47a;
+      margin-bottom: 1em;
     }
 
     @media (max-width: 480px) {
-      h1 {
-        font-size: 2em;
+      .container {
+        margin: 1em;
+        padding: 1.5em;
       }
 
-      .custom-input, .result, form {
-        width: 90%;
-      }
-
-      button {
-        width: 80%;
+      .summe-value {
+        font-size: 2.2em;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>💖 Der große Liebeskompatibilitätstester 💖</h1>
-  <div class="heart">💓💓💓</div>
+  <div class="container" id="mainContainer">
+    <h1>Der Liebeskompatibilitätstester</h1>
+    <div class="ornaments">❁ ❃ ✿ ❦ ❧ ✤ ❀ ✾</div>
 
-  <form id="loveForm">
-    <label for="partnerA">Dein Geburtsdatum:</label>
-    <input type="text" class="custom-input" id="partnerA" placeholder="TT.MM.JJJJ" required>
+    <form id="loveForm">
+      <div>
+        <label for="partnerA">Dein Geburtsdatum:</label>
+        <input type="text" id="partnerA" class="ornament-input" placeholder="TT.MM.JJJJ" required>
+      </div>
+      <div>
+        <label for="partnerB">Geburtsdatum deines Partners:</label>
+        <input type="text" id="partnerB" class="ornament-input" placeholder="TT.MM.JJJJ" required>
+      </div>
+      <button type="submit">Kompatibilität berechnen ✨</button>
+    </form>
 
-    <label for="partnerB">Geburtsdatum deines Schwarms:</label>
-    <input type="text" class="custom-input" id="partnerB" placeholder="TT.MM.JJJJ" required>
+    <div class="summe-box" id="summeBox" style="display: none;">
+      🌟 Eure magische Zahl: <span class="summe-value" id="summeValue">0</span> 🌟
+    </div>
 
-    <button type="submit">💘 Liebe berechnen 💘</button>
-  </form>
+    <div class="result" id="resultBox" style="display: none;"></div>
+  </div>
 
-  <div class="result" id="resultBox" style="display: none;"></div>
+  <footer>❧ Für Herzensangelegenheiten entwickelt mit Liebe ❧</footer>
 
   <script>
     function summeAusGeburtstag(geburtstag) {
@@ -152,16 +210,30 @@
 
     function kommentar(diff) {
       if (diff === 0) {
-        return "💞 <strong class='supermatch'>ABSOLUTER SUPERMATCH!</strong> Eure Seelen sind synchronisiert! 💞";
+        return "<div class='supermatch'>💍 ABSOLUTER SUPERMATCH – Zwei Seelen, ein Gedanke! 💍</div>";
       } else if (diff <= 1) {
-        return "✨ <strong>Super!</strong> Eure Herzen tanzen im selben Takt! ✨";
+        return "💞 Fast identisch – eure Herzen schlagen synchron!";
       } else if (diff <= 5) {
-        return "💖 <strong>Sehr glücklich!</strong> Liebe liegt in der Luft. 💖";
+        return "💖 Sehr gute Harmonie – da knistert’s!";
       } else if (diff <= 10) {
-        return "🌹 <strong>Glücklich!</strong> Ihr ergänzt euch wunderbar! 🌹";
+        return "🌿 Gute Basis, Liebe braucht Pflege.";
       } else {
-        return "💔 <strong>Hmm...</strong> Eure Zahlen tanzen nicht ganz im Gleichklang – aber wer weiß? 💔";
+        return "🖤 Unterschiedlich wie Tag und Nacht – aber Gegensätze ziehen sich manchmal an...";
       }
+    }
+
+    function animateNumber(element, to) {
+      let current = 0;
+      const step = Math.ceil(to / 50);
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= to) {
+          current = to;
+          clearInterval(interval);
+        }
+        element.textContent = current;
+        element.style.transform = `scale(${1 + current / 100})`;
+      }, 20);
     }
 
     document.getElementById('loveForm').addEventListener('submit', function(e) {
@@ -172,14 +244,27 @@
 
       const sumA = summeAusGeburtstag(partnerA);
       const sumB = summeAusGeburtstag(partnerB);
-
+      const total = sumA + sumB;
       const diff = Math.abs(sumA - sumB);
 
+      const summeBox = document.getElementById('summeBox');
+      const summeValue = document.getElementById('summeValue');
       const resultBox = document.getElementById('resultBox');
-      resultBox.innerHTML = kommentar(diff);
+      const container = document.getElementById('mainContainer');
+
+      // Animation
+      summeBox.style.display = 'block';
       resultBox.style.display = 'block';
+      animateNumber(summeValue, total);
+      resultBox.innerHTML = kommentar(diff);
+
+      // Thematik umschalten
+      if (diff > 15) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
     });
   </script>
-
 </body>
 </html>
