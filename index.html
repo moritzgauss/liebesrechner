@@ -3,95 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>❧ Der große Liebestester ❧</title>
+  <title>❧ Liebestester ❧</title>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Georgia', serif;
+      width: 100%; height: 100%;
+      font-family: 'Helvetica Bold', sans-serif;
       background: linear-gradient(145deg, #f6f3ea, #eaf5f0);
       color: #3e2f2f;
       overflow-x: hidden;
-      transition: all 1s ease;
+      transition: background 0.8s ease, color 0.8s ease;
     }
-
     h1 {
       text-align: center;
-      font-size: 2.2em;
+      font-size: 2em;
       margin-top: 1.5em;
-      margin-bottom: 0.3em;
       padding: 0 1em;
     }
-
-    h1::before, h1::after {
-      content: "❧❁❦";
-      color: #bfa27d;
-      margin: 0 0.3em;
-    }
-
     .ornaments {
       text-align: center;
-      font-size: 1.4em;
+      font-size: 1.3em;
       color: #bcae8b;
-      margin-bottom: 1em;
+      margin: 0.5em 0 1em;
     }
-
     form {
       display: flex;
       flex-direction: column;
       gap: 1.2em;
-      max-width: 500px;
+      width: 90%;
+      max-width: 400px;
       margin: 0 auto;
       padding: 0 1em;
     }
-
     label {
       font-weight: bold;
-      font-size: 1.1em;
-      margin-bottom: 0.3em;
-    }
-
-    input[type="date"] {
       font-size: 1em;
-      padding: 12px 16px;
-      border: 2px solid #9b856d;
-      background: #fefbf8;
-      border-radius: 20px;
-      font-family: 'Georgia', serif;
-      width: 100%;
-      box-sizing: border-box;
-      color: #3e2f2f;
     }
-
-    input[type="date"]:focus {
+    .input-box {
+      position: relative;
+    }
+    .input-box input {
+      width: 100%;
+      font-size: 1.1em;
+      padding: 14px 12px;
+      border: 3px solid #9b856d;
+      border-radius: 8px;
+      font-family: 'Helvetica Bold', sans-serif;
+    }
+    .input-box input:focus {
       outline: none;
       border-color: #b3997e;
       background: #fff8f0;
     }
-
     button {
       background: #a28568;
       color: #fff;
       font-size: 1.2em;
       padding: 12px 40px;
       border: none;
-      border-radius: 30px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 1em;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: background 0.3s;
     }
-
-    button:hover {
-      background: #b4977a;
-    }
-
+    button:hover { background: #b4977a; }
     .summe-box {
       margin-top: 2em;
       text-align: center;
       font-size: 1.4em;
+      animation: fadeIn 0.8s ease;
     }
-
     .summe-value {
       display: block;
       font-size: 3em;
@@ -100,153 +81,122 @@
       color: #5c3b2d;
       animation: grow 0.6s ease;
     }
-
     .result {
       margin-top: 1.5em;
       text-align: center;
       font-size: 1.3em;
-      padding: 1em 1.5em;
+      padding: 0 1.5em;
     }
-
     @keyframes grow {
-      from { transform: scale(0.8); opacity: 0.3; }
+      from { transform: scale(0.7); opacity: 0.3; }
       to { transform: scale(1); opacity: 1; }
     }
-
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .supermatch {
       color: #e09b63;
       animation: sparkle 1s infinite alternate;
     }
-
     @keyframes sparkle {
       from { opacity: 1; transform: scale(1); }
       to { opacity: 0.8; transform: scale(1.08); }
     }
-
     .dark-mode {
-      background: #111 !important;
+      background: #111;
       color: #ccc;
     }
-
-    .dark-mode input,
-    .dark-mode button {
-      background: #222;
-      color: #ddd;
-      border-color: #444;
+    .dark-mode input, .dark-mode button {
+      background: #222; color: #ddd; border-color: #444;
     }
-
     footer {
-      margin-top: 3em;
+      margin: 3em 0;
       text-align: center;
       font-size: 0.9em;
       color: #999;
     }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6em;
-      }
-
-      .summe-value {
-        font-size: 2.4em;
-      }
-
-      button {
-        font-size: 1em;
-        padding: 10px 24px;
-      }
-
-      input[type="date"] {
-        font-size: 1em;
-        padding: 10px 14px;
-      }
+    @media(max-width:500px){
+      h1 { font-size: 1.6em; }
+      .summe-value { font-size: 2.4em; }
+      button { font-size: 1em; padding:10px 24px; }
+      .input-box input { font-size: 1em; padding: 12px; }
     }
   </style>
 </head>
 <body>
-  <h1>Der Liebeskompatibilitätstester</h1>
+
+  <h1>Der Liebestester</h1>
   <div class="ornaments">❀ ❧ ✿ ❁ ✾ ❦ ❃ ✤</div>
 
-  <form id="loveForm">
-    <div>
-      <label for="partnerA">Dein Geburtsdatum:</label>
-      <input type="date" id="partnerA" required>
+  <form id="loveForm" autocomplete="off">
+    <div class="input-box">
+      <label for="partnerA">Dein Geburtstag:</label>
+      <input type="text" id="partnerA" placeholder="TT.MM.JJJJ" inputmode="numeric" maxlength="10" required>
     </div>
-    <div>
-      <label for="partnerB">Geburtsdatum deines Partners:</label>
-      <input type="date" id="partnerB" required>
+    <div class="input-box">
+      <label for="partnerB">Geburtstag des Partners:</label>
+      <input type="text" id="partnerB" placeholder="TT.MM.JJJJ" inputmode="numeric" maxlength="10" required>
     </div>
-    <button type="submit">✨ Kompatibilität berechnen ✨</button>
+    <button type="submit">Kompatibilität prüfen ✨</button>
   </form>
 
-  <div class="summe-box" id="summeBox" style="display: none;">
-    🌟 Eure gemeinsame Geburtszahl:  
-    <span class="summe-value" id="summeValue">0</span>
+  <div class="summe-box" id="summeBox" style="display:none;">
+    🌟 Ergebnis: <span class="summe-value" id="summeValue">0</span> 🌟
   </div>
+  <div class="result" id="resultBox" style="display:none;"></div>
 
-  <div class="result" id="resultBox" style="display: none;"></div>
-
-  <footer>❧ Mit Unicode und Zuneigung gemacht ❧</footer>
+  <footer>❧ Made with ornament & love ❧</footer>
 
   <script>
-    function parseDateSumFromInput(dateStr) {
-      const date = new Date(dateStr);
-      if (isNaN(date)) return 0;
-      return date.getDate() + (date.getMonth() + 1) + date.getFullYear();
+    function formatDate(e) {
+      let v = e.target.value.replace(/\D/g,'').slice(0,8);
+      if(v.length>4) e.target.value = v.slice(0,2)+'.'+v.slice(2,4)+'.'+v.slice(4);
+      else if(v.length>2) e.target.value = v.slice(0,2)+'.'+v.slice(2);
+      else e.target.value=v;
+    }
+
+    function parseDateSum(str) {
+      const [d,m,y] = str.split('.').map(Number);
+      if(!d||!m||!y) return NaN;
+      return d+m+y;
     }
 
     function animateNumber(el, to) {
-      let current = 0;
-      const step = Math.ceil(to / 40);
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= to) {
-          current = to;
-          clearInterval(interval);
-        }
-        el.textContent = current;
-      }, 25);
+      let c=0, step=Math.max(1,Math.ceil(to/40));
+      const iv = setInterval(()=> {
+        c+=step;
+        if(c>=to){c=to;clearInterval(iv);}
+        el.textContent=c;
+      },25);
     }
 
-    function getComment(total) {
-      if (total < 2000) {
-        return "🖤 Sehr verschieden – vielleicht aus verschiedenen Welten?";
-      } else if (total < 3000) {
-        return "🌙 Etwas distanziert – Liebe braucht hier Geduld.";
-      } else if (total < 4000) {
-        return "🌹 Gute Harmonie – daraus kann mehr werden.";
-      } else if (total < 5000) {
-        return "💞 Sehr viel Potenzial – da ist Magie!";
-      } else {
-        return "<span class='supermatch'>💍 ABSOLUTER SUPERMATCH – Zwei Seelen, eine Zahl! 💍</span>";
-      }
+    function getComment(diff,same){
+      if(same) return "<span class='supermatch'>💍 SUPERMATCH – exakt dieselbe Zahl!</span>";
+      if(diff===1) return "💖 Fast identisch!";
+      if(diff<=5) return "😊 Sehr glücklich";
+      if(diff<=10) return "🙂 Glücklich";
+      if(diff<=25) return "😐 Unterschiedlich";
+      return "🖤 Stark unterschiedlich";
     }
 
-    document.getElementById('loveForm').addEventListener('submit', function(e) {
+    document.querySelectorAll('.input-box input').forEach(i => i.addEventListener('input', formatDate));
+
+    document.getElementById('loveForm').addEventListener('submit', (e)=>{
       e.preventDefault();
+      const a = parseDateSum(partnerA.value), b=parseDateSum(partnerB.value);
+      if(isNaN(a)||isNaN(b)) return;
+      const same = a===b, diff=Math.abs(a-b);
+      const target = same ? a : diff;
 
-      const a = document.getElementById('partnerA').value;
-      const b = document.getElementById('partnerB').value;
+      summeBox.style.display='block';
+      resultBox.style.display='block';
+      animateNumber(summeValue, target);
+      resultBox.innerHTML = getComment(diff, same);
 
-      if (!a || !b) return;
-
-      const sum = parseDateSumFromInput(a) + parseDateSumFromInput(b);
-      const summeBox = document.getElementById('summeBox');
-      const summeValue = document.getElementById('summeValue');
-      const resultBox = document.getElementById('resultBox');
-
-      summeBox.style.display = 'block';
-      resultBox.style.display = 'block';
-
-      animateNumber(summeValue, sum);
-      resultBox.innerHTML = getComment(sum);
-
-      if (sum < 2000) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
+      document.body.classList.toggle('dark-mode', !same && diff>25);
     });
   </script>
+
 </body>
 </html>
